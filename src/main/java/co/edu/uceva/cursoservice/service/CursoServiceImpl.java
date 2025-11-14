@@ -40,6 +40,25 @@ public class CursoServiceImpl implements CursoService {
     }
 
     @Override
+    public Map<String, Object> ejecutarBiseccion(Map<String, Object> body) {
+        String url = "http://localhost:8080/api/ova/analisis-numerico";
+        return restTemplate.postForObject(url, body, Map.class);
+    }
+
+    @Override
+    public Map<String, Object> ejecutarCesar(Map<String, Object> body) {
+        String url = "http://localhost:8080/api/ova/matematicas-discretas";
+        return restTemplate.postForObject(url, body, Map.class);
+    }
+
+    @Override
+    public Map<String, Object> ejecutarEscitala(Map<String, Object> body) {
+        String url = "http://localhost:8080/api/ova/matematicas-discretas";
+        return restTemplate.postForObject(url, body, Map.class);
+    }
+
+
+    @Override
     public List<Ova> obtenerOvasDelCurso(Long idCurso) {
 
         String url = "http://localhost:8080/api/ova/curso/" + idCurso;
