@@ -26,10 +26,12 @@ public class CursoService {
 
     // Eliminar curso por ID
     public void eliminarCurso(Long id) {
-        cursoRepository.findById(id)
-                .ifPresentOrElse(
-                        cursoRepository::delete,
-                        () -> { throw new RuntimeException("Curso no encontrado con ID: " + id); }
-                );
+        // En lugar de lanzar excepción, podrías verificar silenciosamente
+        cursoRepository.findById(id).ifPresent(cursoRepository::delete);
+
+        // O si quieres mantener la validación:
+        Curso curso = cursoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Curso no encontrado con ID: " + id));
+        cursoRepository.delete(curso);
     }
 }
